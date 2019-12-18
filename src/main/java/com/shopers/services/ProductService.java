@@ -21,4 +21,10 @@ public class ProductService {
   public void saveAll(List<Product> data) {
     productRepo.saveAll(data);
   }
+
+  public Iterable<Product> searchFor(String query) {
+    return productRepo.findByNameOrDescriptionContains(query, query);
+//    return null;
+  }
+
 }

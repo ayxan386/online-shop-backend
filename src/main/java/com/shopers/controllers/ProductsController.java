@@ -28,4 +28,9 @@ public class ProductsController {
     return "success";
   }
 
+  @GetMapping("/search")
+  Iterable<Product> searchFor(@RequestParam("q") String query) {
+    return productService.searchFor(query);
+  }
+
 }
