@@ -25,5 +25,8 @@ public class Cart {
     @Column(name = "status")
     String status;
 
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "product_id")
+  private Product product;
 
 }
