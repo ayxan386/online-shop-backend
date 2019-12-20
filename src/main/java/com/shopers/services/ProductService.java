@@ -25,10 +25,12 @@ public class ProductService {
 
   public Iterable<Product> searchFor(String query) {
     return productRepo.findByNameOrDescriptionContains(query, query);
-//    return null;
   }
   public Optional<Product> getById(int id){
     return productRepo.findById(id);
   }
 
+  public Iterable<Product> searchForType(String type) {
+    return productRepo.findByTypeContains(type);
+  }
 }
