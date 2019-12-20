@@ -33,4 +33,9 @@ public class ProductsController {
     return productService.searchFor(query);
   }
 
+  @GetMapping("/type")
+  Iterable<Product> searchForType(@RequestParam("type") String type) {
+    return productService.searchForType(type);
+  }
+
 }

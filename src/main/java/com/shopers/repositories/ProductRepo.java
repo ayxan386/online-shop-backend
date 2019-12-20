@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepo extends CrudRepository<Product, Integer> {
   Iterable<Product> findByNameOrDescriptionContains(@Param("name") String name, @Param("description") String description);
+
+  Iterable<Product> findByTypeContains(@Param("type") String type);
+
 }

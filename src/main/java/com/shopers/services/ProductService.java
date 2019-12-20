@@ -24,7 +24,9 @@ public class ProductService {
 
   public Iterable<Product> searchFor(String query) {
     return productRepo.findByNameOrDescriptionContains(query, query);
-//    return null;
   }
 
+  public Iterable<Product> searchForType(String type) {
+    return productRepo.findByTypeContains(type);
+  }
 }
