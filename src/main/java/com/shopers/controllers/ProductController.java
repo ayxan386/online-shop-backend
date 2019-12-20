@@ -21,4 +21,9 @@ public class ProductController {
     Optional<Product> getProduct(@PathVariable("id") int id){
         return productService.getById(id);
     }
+    @GetMapping("")
+    Optional<Product> getProduct2(@RequestParam("id") int id){
+        return productService.getById(id);
+    }
 }
+
