@@ -5,6 +5,7 @@ import com.shopers.repositories.ProductRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -25,6 +26,9 @@ public class ProductService {
   public Iterable<Product> searchFor(String query) {
     return productRepo.findByNameOrDescriptionContains(query, query);
 //    return null;
+  }
+  public Optional<Product> getById(int id){
+    return productRepo.findById(id);
   }
 
 }
