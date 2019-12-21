@@ -38,4 +38,9 @@ public class ProductsController {
     return productService.searchForType(type);
   }
 
+  @GetMapping("/discount**")
+  Iterable<Product> getAllDiscounts() {
+    return productService.getAllDiscounts();
+  }
+
 }

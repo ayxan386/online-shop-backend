@@ -11,4 +11,5 @@ public interface ProductRepo extends CrudRepository<Product, Integer> {
 
   Iterable<Product> findByTypeContains(@Param("type") String type);
 
+  Iterable<Product> findByDiscountGreaterThan(@Param("discount") int discount);
 }

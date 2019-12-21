@@ -33,4 +33,8 @@ public class ProductService {
   public Iterable<Product> searchForType(String type) {
     return productRepo.findByTypeContains(type);
   }
+
+  public Iterable<Product> getAllDiscounts() {
+    return productRepo.findByDiscountGreaterThan(0);
+  }
 }
