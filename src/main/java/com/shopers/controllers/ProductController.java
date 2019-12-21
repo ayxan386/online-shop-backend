@@ -19,7 +19,10 @@ public class ProductController {
 
     @GetMapping("/{id}")
     Optional<Product> getProduct(@PathVariable("id") int id){
-        return productService.getById(id);
+      System.out.printf("%s\n", id);
+      Optional<Product> byId = productService.getById(id);
+      byId.ifPresent(product -> System.out.println(product));
+      return byId;
     }
     @GetMapping("")
     Optional<Product> getProduct2(@RequestParam("id") int id){
