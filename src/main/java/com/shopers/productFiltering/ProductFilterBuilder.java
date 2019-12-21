@@ -11,27 +11,27 @@ public class ProductFilterBuilder {
   private Optional<Integer> discount;
 
   public ProductFilterBuilder withType(String type) {
-    this.type = Optional.of(type);
+    this.type = Optional.ofNullable(type);
     return this;
   }
 
   public ProductFilterBuilder withBrand(String brand) {
-    this.brand = Optional.of(brand);
+    this.brand = Optional.ofNullable(brand);
     return this;
   }
 
   public ProductFilterBuilder withSize(List<Integer> sizes) {
-    this.size = Optional.of(sizes);
+    this.size = Optional.ofNullable(sizes);
     return this;
   }
 
   public ProductFilterBuilder withPrice(Integer price) {
-    this.price = Optional.of(price);
+    this.price = Optional.ofNullable(price);
     return this;
   }
 
   public ProductFilterBuilder withDiscount(Integer discount) {
-    this.discount = Optional.of(discount);
+    this.discount = Optional.ofNullable(discount);
     return this;
   }
 

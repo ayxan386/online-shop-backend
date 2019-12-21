@@ -26,12 +26,12 @@ public class ProductFilterer {
         .filter(product ->
             type.flatMap(
                 type -> Optional.of(product.getType().contains(type)))
-                .orElse(false)
+                .orElse(true)
         ).filter(
             product ->
                 brand.flatMap(
                     brand -> Optional.of(product.getBrand().contains(brand)))
-                    .orElse(false)
+                    .orElse(true)
         ).filter(
             product ->
                 size.flatMap(
@@ -39,21 +39,21 @@ public class ProductFilterer {
                         product.getSize()
                             .stream().anyMatch(size::contains)
                     ))
-                    .orElse(false)
+                    .orElse(true)
         ).filter(
             product ->
                 price.flatMap(
                     price -> Optional.of(
                         product.getPrice() <= price
                     ))
-                    .orElse(false)
+                    .orElse(true)
         ).filter(
             product ->
                 discount.flatMap(
                     discount -> Optional.of(
                         product.getDiscount() <= discount
                     ))
-                    .orElse(false)
+                    .orElse(true)
         );
   }
 }

@@ -25,11 +25,13 @@ public class ProductFilterController {
   }
 
   @GetMapping("")
-  Stream<Product> filterThisPlease(@RequestParam("type") String type,
-                                   @RequestParam("brand") String brand,
-                                   @RequestParam("price") Integer price,
-                                   @RequestParam("discount") Integer discount,
-                                   @RequestParam("size") List<Integer> size) {
+  Stream<Product> filterThisPlease(@RequestParam(value = "type", required = false) String type,
+                                   @RequestParam(value = "brand", required = false) String brand,
+                                   @RequestParam(value = "price", required = false) Integer price,
+                                   @RequestParam(value = "discount", required = false) Integer discount,
+                                   @RequestParam(value = "size", required = false) List<Integer> size) {
+    System.out.printf("type : %s brand : %s price : %s discount : %s size :%s\n",
+        type, brand, price, discount, size);
     return new ProductFilterBuilder()
         .withType(type)
         .withBrand(brand)
