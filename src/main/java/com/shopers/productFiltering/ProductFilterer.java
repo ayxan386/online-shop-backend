@@ -1,0 +1,59 @@
+package com.shopers.productFiltering;
+
+import com.shopers.entities.Product;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+public class ProductFilterer {
+  private final Optional<String> type;
+  private final Optional<String> brand;
+  private final Optional<List<Integer>> size;
+  private final Optional<Integer> price;
+  private final Optional<Integer> discount;
+
+  public ProductFilterer(Optional<String> type, Optional<String> brand, Optional<List<Integer>> size, Optional<Integer> price, Optional<Integer> discount) {
+    this.type = type;
+    this.brand = brand;
+    this.size = size;
+    this.price = price;
+    this.discount = discount;
+  }
+
+  public Stream<Product> filter(Stream<Product> org) {
+    return org
+        .filter(product ->
+            type.flatMap(
+                type -> Optional.of(product.getType().contains(type)))
+                .orElse(false)
+        ).filter(
+            product ->
+                brand.flatMap(
+                    brand -> Optional.of(product.getBrand().contains(brand)))
+                    .orElse(false)
+        ).filter(
+            product ->
+                size.flatMap(
+                    size -> Optional.of(
+                        product.getSize()
+                            .stream().anyMatch(size::contains)
+                    ))
+                    .orElse(false)
+        ).filter(
+            product ->
+                price.flatMap(
+                    price -> Optional.of(
+                        product.getPrice() <= price
+                    ))
+                    .orElse(false)
+        ).filter(
+            product ->
+                discount.flatMap(
+                    discount -> Optional.of(
+                        product.getDiscount() <= discount
+                    ))
+                    .orElse(false)
+        );
+  }
+}
