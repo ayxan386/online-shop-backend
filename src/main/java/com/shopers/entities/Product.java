@@ -50,4 +50,7 @@ public class Product {
   @Column(name = "itemNo")
   String itemNo;
 
+  @Column(name = "discount", columnDefinition = "integer default 0")
+  int discount;
+
 }
