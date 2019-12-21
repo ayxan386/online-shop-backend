@@ -30,8 +30,8 @@ public class ProductFilterController {
                                    @RequestParam(value = "price", required = false) Integer price,
                                    @RequestParam(value = "discount", required = false) Integer discount,
                                    @RequestParam(value = "size", required = false) List<Integer> size) {
-    System.out.printf("type : %s brand : %s price : %s discount : %s size :%s\n",
-        type, brand, price, discount, size);
+//    System.out.printf("type : %s brand : %s price : %s discount : %s size :%s\n",
+//        type, brand, price, discount, size);
     return new ProductFilterBuilder()
         .withType(type)
         .withBrand(brand)
