@@ -1,11 +1,14 @@
 package com.shopers.controllers;
 
 import com.shopers.entities.Product;
+import com.shopers.productFiltering.ProductFilterBuilder;
 import com.shopers.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/api/products**")
@@ -18,8 +21,22 @@ public class ProductsController {
   }
 
   @GetMapping("")
-  Iterable<Product> getAll() {
-    return productService.findAll();
+  Stream<Product> findAll(@RequestParam(value = "type", required = false) String type,
+                          @RequestParam(value = "brand", required = false) String brand,
+                          @RequestParam(value = "price", required = false) Integer price,
+                          @RequestParam(value = "discount", required = false) Integer discount,
+                          @RequestParam(value = "size", required = false) List<Integer> size) {
+    return new ProductFilterBuilder()
+        .withType(type)
+        .withBrand(brand)
+        .withDiscount(discount)
+        .withPrice(price)
+        .withSize(size)
+        .build()
+        .filter(
+            StreamSupport.stream(
+                productService.findAll().spliterator(), false)
+        );
   }
 
   @PostMapping("")
@@ -29,18 +46,61 @@ public class ProductsController {
   }
 
   @GetMapping("/search")
-  Iterable<Product> searchFor(@RequestParam("q") String query) {
-    return productService.searchFor(query);
+  Stream<Product> searchFor(@RequestParam("q") String query,
+                            @RequestParam(value = "type", required = false) String type,
+                            @RequestParam(value = "brand", required = false) String brand,
+                            @RequestParam(value = "price", required = false) Integer price,
+                            @RequestParam(value = "discount", required = false) Integer discount,
+                            @RequestParam(value = "size", required = false) List<Integer> size) {
+    return new ProductFilterBuilder()
+        .withType(type)
+        .withBrand(brand)
+        .withDiscount(discount)
+        .withPrice(price)
+        .withSize(size)
+        .build()
+        .filter(
+            StreamSupport.stream(
+                productService.searchFor(query).spliterator(), false)
+        );
   }
 
   @GetMapping("/type")
-  Iterable<Product> searchForType(@RequestParam("type") String type) {
-    return productService.searchForType(type);
+  Stream<Product> searchForType(@RequestParam("type") String type,
+                                @RequestParam(value = "brand", required = false) String brand,
+                                @RequestParam(value = "price", required = false) Integer price,
+                                @RequestParam(value = "discount", required = false) Integer discount,
+                                @RequestParam(value = "size", required = false) List<Integer> size) {
+    return new ProductFilterBuilder()
+        .withType(null)
+        .withBrand(brand)
+        .withDiscount(discount)
+        .withPrice(price)
+        .withSize(size)
+        .build()
+        .filter(
+            StreamSupport.stream(
+                productService.searchForType(type).spliterator(), false)
+        );
   }
 
   @GetMapping("/discount**")
-  Iterable<Product> getAllDiscounts() {
-    return productService.getAllDiscounts();
+  Stream<Product> getAllDiscounts(@RequestParam(value = "type", required = false) String type,
+                                  @RequestParam(value = "brand", required = false) String brand,
+                                  @RequestParam(value = "price", required = false) Integer price,
+                                  @RequestParam(value = "discount", required = false) Integer discount,
+                                  @RequestParam(value = "size", required = false) List<Integer> size) {
+    return new ProductFilterBuilder()
+        .withType(type)
+        .withBrand(brand)
+        .withDiscount(discount)
+        .withPrice(price)
+        .withSize(size)
+        .build()
+        .filter(
+            StreamSupport.stream(
+                productService.getAllDiscounts().spliterator(), false)
+        );
   }
 
 }
