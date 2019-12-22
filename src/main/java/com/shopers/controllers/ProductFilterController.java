@@ -30,6 +30,7 @@ public class ProductFilterController {
                                    @RequestParam(value = "price", required = false) Integer price,
                                    @RequestParam(value = "discount", required = false) Integer discount,
                                    @RequestParam(value = "size", required = false) List<Integer> size) {
+
     return new ProductFilterBuilder()
         .withType(type)
         .withBrand(brand)
