@@ -46,7 +46,8 @@ public class ProductFilterer {
             product ->
                 category.flatMap(
                     category -> Optional.of(
-                        product.getCategory().equalsIgnoreCase(category)
+                        product.getCategory()
+                            .contains(category)
                     ))
                     .orElse(true)
         ).filter(
