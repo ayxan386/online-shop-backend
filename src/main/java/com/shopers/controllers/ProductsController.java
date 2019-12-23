@@ -23,12 +23,14 @@ public class ProductsController {
   @GetMapping("")
   Stream<Product> findAll(@RequestParam(value = "type", required = false) String type,
                           @RequestParam(value = "brand", required = false) String brand,
+                          @RequestParam(value = "category", required = false) String category,
                           @RequestParam(value = "price", required = false) Integer price,
                           @RequestParam(value = "discount", required = false) Integer discount,
                           @RequestParam(value = "size", required = false) List<Integer> size) {
     return new ProductFilterBuilder()
         .withType(type)
         .withBrand(brand)
+        .withCategory(category)
         .withDiscount(discount)
         .withPrice(price)
         .withSize(size)
@@ -49,12 +51,14 @@ public class ProductsController {
   Stream<Product> searchFor(@RequestParam("q") String query,
                             @RequestParam(value = "type", required = false) String type,
                             @RequestParam(value = "brand", required = false) String brand,
+                            @RequestParam(value = "category", required = false) String category,
                             @RequestParam(value = "price", required = false) Integer price,
                             @RequestParam(value = "discount", required = false) Integer discount,
                             @RequestParam(value = "size", required = false) List<Integer> size) {
     return new ProductFilterBuilder()
         .withType(type)
         .withBrand(brand)
+        .withCategory(category)
         .withDiscount(discount)
         .withPrice(price)
         .withSize(size)
@@ -68,12 +72,14 @@ public class ProductsController {
   @GetMapping("/type")
   Stream<Product> searchForType(@RequestParam("type") String type,
                                 @RequestParam(value = "brand", required = false) String brand,
+                                @RequestParam(value = "category", required = false) String category,
                                 @RequestParam(value = "price", required = false) Integer price,
                                 @RequestParam(value = "discount", required = false) Integer discount,
                                 @RequestParam(value = "size", required = false) List<Integer> size) {
     return new ProductFilterBuilder()
         .withType(null)
         .withBrand(brand)
+        .withCategory(category)
         .withDiscount(discount)
         .withPrice(price)
         .withSize(size)
@@ -87,12 +93,14 @@ public class ProductsController {
   @GetMapping("/discount**")
   Stream<Product> getAllDiscounts(@RequestParam(value = "type", required = false) String type,
                                   @RequestParam(value = "brand", required = false) String brand,
+                                  @RequestParam(value = "category", required = false) String category,
                                   @RequestParam(value = "price", required = false) Integer price,
                                   @RequestParam(value = "discount", required = false) Integer discount,
                                   @RequestParam(value = "size", required = false) List<Integer> size) {
     return new ProductFilterBuilder()
         .withType(type)
         .withBrand(brand)
+        .withCategory(category)
         .withDiscount(discount)
         .withPrice(price)
         .withSize(size)

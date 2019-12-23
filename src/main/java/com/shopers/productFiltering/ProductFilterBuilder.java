@@ -6,6 +6,7 @@ import java.util.Optional;
 public class ProductFilterBuilder {
   private Optional<String> type;
   private Optional<String> brand;
+  private Optional<String> category;
   private Optional<List<Integer>> size;
   private Optional<Integer> price;
   private Optional<Integer> discount;
@@ -35,7 +36,12 @@ public class ProductFilterBuilder {
     return this;
   }
 
+  public ProductFilterBuilder withCategory(String category) {
+    this.category = Optional.ofNullable(category);
+    return this;
+  }
+
   public ProductFilterer build() {
-    return new ProductFilterer(type, brand, size, price, discount);
+    return new ProductFilterer(type, brand, category, size, price, discount);
   }
 }

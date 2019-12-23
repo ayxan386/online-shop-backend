@@ -9,13 +9,15 @@ import java.util.stream.Stream;
 public class ProductFilterer {
   private final Optional<String> type;
   private final Optional<String> brand;
+  private final Optional<String> category;
   private final Optional<List<Integer>> size;
   private final Optional<Integer> price;
   private final Optional<Integer> discount;
 
-  public ProductFilterer(Optional<String> type, Optional<String> brand, Optional<List<Integer>> size, Optional<Integer> price, Optional<Integer> discount) {
+  public ProductFilterer(Optional<String> type, Optional<String> brand, Optional<String> category, Optional<List<Integer>> size, Optional<Integer> price, Optional<Integer> discount) {
     this.type = type;
     this.brand = brand;
+    this.category = category;
     this.size = size;
     this.price = price;
     this.discount = discount;
@@ -38,6 +40,13 @@ public class ProductFilterer {
                     size -> Optional.of(
                         product.getSize()
                             .stream().anyMatch(size::contains)
+                    ))
+                    .orElse(true)
+        ).filter(
+            product ->
+                category.flatMap(
+                    category -> Optional.of(
+                        product.getCategory().equalsIgnoreCase(category)
                     ))
                     .orElse(true)
         ).filter(
